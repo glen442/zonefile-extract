@@ -21,7 +21,12 @@ for (i = 1, len = rows.length - 2; i < len; i++) {
 
   if (type === 'TXT/SPF') {
     type = 'TXT';
-    destination = '"' + destination + '"';
+    
+    //Check that there aren't already quotes there
+    //probably only need to to check one end
+    if (destination.charAt(0) != '"') && (destination.charAt(destination.length-1) != '"' ) {
+      destination = '"' + destination + '"';
+    }// else no change
   }
 
   output += [hostname, ttl, 'IN', type, priority, destination].join(' ') + '\n';
